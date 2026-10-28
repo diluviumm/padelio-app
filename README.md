@@ -4,6 +4,7 @@ Aplikasi komunitas padel: ladder ELO, challenge, booking lapangan, event + brack
 
 > **Status:** live di **https://padelio.naygars.site** (Cloudflare Tunnel → `127.0.0.1:8001` di laptop).
 > Tidak memakai `padel.ishmly.space`.
+> **Repo publik:** `github.com/diluviumm/padelio-app` · **Backup privat:** `github.com/diluviumm/padelio-app-backup` (setiap push ke `origin` dikirim ke keduanya).
 > Repo mock lama (`diluviumm/padelio`) tetap menjadi referensi tampilan; proyek ini adalah implementasi full PHP.
 
 ---
@@ -34,12 +35,12 @@ Aplikasi komunitas padel: ladder ELO, challenge, booking lapangan, event + brack
 
 | Peran | Email | Password | Pemain |
 |---|---|---|---|
-| Admin | `admin@padelio.id` | `admin12345` | — |
-| User | `user@padelio.id` | `user12345` | Hadi |
-| User | `andi@padelio.id` | `andi12345` | Andi |
-| User | `rio@padelio.id` | `rio12345` | Rio |
+| Admin | `admin@padelio.id` | *dirotasi* | — |
+| User | `user@padelio.id` | *dirotasi* | Hadi |
+| User | `andi@padelio.id` | *dirotasi* | Andi |
+| User | `rio@padelio.id` | *dirotasi* | Rio |
 
-> Kredensial demo hanya untuk lokal. Hapus/rotasi sebelum produksi.
+> Semua password demo dirotasi 29 Okt 2026. Nilai disimpan di luar repo; tidak pernah dicetak atau di-commit.
 
 ---
 
@@ -88,7 +89,7 @@ systemctl --user status padelio-app padelio-pg
 - `padelio-app.service` → `php artisan serve --host=127.0.0.1 --port=8001 --no-reload` (4 worker).
 - `padelio-pg.service` → PostgreSQL cluster `~/.local/share/padelio/pgdata`.
 - Cloudflare Tunnel: entri `padelio.naygars.site → http://localhost:8001` di `~/.cloudflared/config.yml`.
-- Kredensial admin/pemain: `~/.hermes/.secrets/padelio-naygars-credentials.env` (mode 600, jangan dicetak).
+- Kredensial admin/pemain disimpan di luar repo (file mode 600); tidak pernah di-commit.
 
 ---
 
