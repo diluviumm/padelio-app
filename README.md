@@ -56,7 +56,7 @@ Data demo (24 pemain, 6 lapangan, 8 peralatan, 3 event, 4 match, 2 booking) **di
 | User | `andi@padelio.id` | *dirotasi* | Andi |
 | User | `rio@padelio.id` | *dirotasi* | Rio |
 
-Password dirotasi 29 Okt 2026; nilai disimpan di luar repo (file mode 600) dan tidak pernah dicetak.
+Password dirotasi 29 Okt 2026; nilai disimpan di luar repo (file mode 600) dan tidak pernah dicetak. `DemoSeeder` diblokir di production kecuali `PADELIO_ALLOW_DEMO_SEED=true`; password demo di seeder hanya untuk test/lokal.
 
 ---
 
@@ -86,7 +86,7 @@ php artisan storage:link
 php artisan test
 ```
 
-44 test / 119 assertion, database `padelio_test`, `RefreshDatabase`. CI berjalan di GitHub Actions (PHP 8.4 + PostgreSQL 16 service).
+45 test / 125 assertion, database `padelio_test`, `RefreshDatabase`. CI berjalan di GitHub Actions (PHP 8.4 + PostgreSQL 16 service).
 
 ---
 

@@ -26,6 +26,10 @@ class DemoSeeder extends Seeder
 {
     public function run(): void
     {
+        if (app()->environment('production') && ! filter_var(env('PADELIO_ALLOW_DEMO_SEED', false), FILTER_VALIDATE_BOOL)) {
+            throw new \RuntimeException('DemoSeeder disabled in production. Set PADELIO_ALLOW_DEMO_SEED=true only for explicit demo seeding.');
+        }
+
         $admin = User::create([
             'name' => 'Admin Padelio',
             'email' => 'admin@padelio.id',
