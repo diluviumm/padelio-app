@@ -557,6 +557,11 @@ table.tbl{width:100%;border-collapse:collapse;font-size:.88rem;min-width:560px}
 .dd[open]>.dropdown{opacity:1;transform:none;pointer-events:auto}
 .brand-img{height:34px;width:auto}
 .nav-inner{gap:14px}
+@media (max-width:1119px){.user-chip .meta{display:none}}
+@media (min-width:900px) and (max-width:1119px){
+  .nav-inner{gap:8px}
+  .nav-links a{padding:8px 10px;font-size:.86rem}
+}
 .auth-shell{max-width:460px;margin:40px auto}
 .auth-card{padding:26px}
 .auth-card h1{font-size:1.4rem;margin-bottom:4px}

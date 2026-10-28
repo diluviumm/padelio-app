@@ -16,7 +16,7 @@ Aplikasi komunitas padel: ladder ELO, challenge, booking lapangan, event + brack
 | Database | PostgreSQL 18 (cluster user, port 5544) |
 | Auth | Laravel Auth + Argon2id (`password` cast `hashed`) |
 | Frontend | Blade + CSS custom (tanpa Node/build step) |
-| Testing | PHPUnit 12 (38 test, 104 assertion) |
+| Testing | PHPUnit 12 (44 test, 119 assertion) |
 
 ---
 
@@ -72,7 +72,7 @@ Buka `http://127.0.0.1:8001`.
 php artisan test
 ```
 
-Test memakai database `padelio_test` (lihat `phpunit.xml`) dan `RefreshDatabase`.
+44 test / 119 assertion, memakai database `padelio_test` (lihat `phpunit.xml`) dan `RefreshDatabase`.
 
 ---
 
