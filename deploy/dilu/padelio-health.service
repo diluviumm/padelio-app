@@ -1,0 +1,12 @@
+[Unit]
+Description=Padelio uptime monitor (remote)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+Environment=PADELIO_HEALTH_URL=https://padelio.naygars.site/up
+Environment=PADELIO_NTFY_URL=http://127.0.0.1:8090
+Environment=PADELIO_NTFY_TOPIC=hermes
+Environment=XDG_STATE_HOME=/var/lib
+ExecStart=/usr/local/bin/padelio-health.sh

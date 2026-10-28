@@ -1,0 +1,27 @@
+server:
+  http_listen_port: 9082
+  grpc_listen_port: 0
+
+positions:
+  filename: /var/lib/promtail/padelio-positions.yaml
+
+clients:
+  - url: http://100.76.188.37:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: padelio
+    static_configs:
+      - targets: [localhost]
+        labels:
+          job: padelio
+          host: dilu
+          app: padelio
+          stream: laravel
+          __path__: /srv/padelio/storage/logs/*.log
+      - targets: [localhost]
+        labels:
+          job: padelio
+          host: dilu
+          app: padelio
+          stream: fpm
+          __path__: /var/log/php8.3-fpm.log

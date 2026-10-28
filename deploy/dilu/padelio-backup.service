@@ -1,0 +1,8 @@
+[Unit]
+Description=Padelio production backup (dilu)
+After=postgresql.service
+
+[Service]
+Type=oneshot
+Environment=PADELIO_OFFSITE_REMOTE=mael:padelio/db
+ExecStart=/usr/local/bin/padelio-backup-dilu.sh

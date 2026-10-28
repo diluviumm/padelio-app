@@ -18,4 +18,10 @@ pg_restore -l "$FILE" > /dev/null
 
 find "$OUT_DIR" -maxdepth 1 -name 'padelio-*.dump' -type f -mtime +14 -delete
 
+if [ -n "${PADELIO_OFFSITE_REMOTE:-}" ] && command -v rclone >/dev/null 2>&1; then
+  rclone copyto "$FILE" "${PADELIO_OFFSITE_REMOTE%/}/$(basename "$FILE")" --no-traverse
+  rclone delete "$PADELIO_OFFSITE_REMOTE" --min-age 14d --include 'padelio-*.dump' 2>/dev/null || true
+  echo "offsite ok: ${PADELIO_OFFSITE_REMOTE%/}/$(basename "$FILE")"
+fi
+
 echo "backup ok: $FILE ($(du -h "$FILE" | cut -f1))"

@@ -1,0 +1,10 @@
+[Unit]
+Description=Daily Padelio production backup (03:50)
+
+[Timer]
+OnCalendar=*-*-* 03:50:00
+Persistent=true
+RandomizedDelaySec=300
+
+[Install]
+WantedBy=timers.target

@@ -115,8 +115,10 @@
 <footer class="desktop-only" style="border-top:1px solid var(--border);margin-top:26px;padding:20px 0 26px">
     <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
         <span class="small muted">&copy; {{ date('Y') }} <b>Padelio</b> — Padel Ladder Indonesia</span>
-        <span class="small faint" style="display:flex;gap:14px">
-            <a href="{{ route('about') }}">Tentang &amp; Cara Kerja</a>
+        <span class="small faint" style="display:flex;gap:14px;flex-wrap:wrap">
+            <a href="{{ route('about') }}">Tentang</a>
+            <a href="{{ route('privacy') }}">Privasi</a>
+            <a href="{{ route('terms') }}">Ketentuan</a>
             <span>Ranking transparan · Challenge · Sewa lapangan</span>
         </span>
     </div>

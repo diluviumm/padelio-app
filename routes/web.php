@@ -33,6 +33,8 @@ Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::get('/events/{event}/bracket', [BracketController::class, 'show'])->name('bracket.show');
 Route::get('/stats', [StatsController::class, 'index'])->name('stats');
 Route::view('/about', 'about')->name('about');
+Route::view('/privacy', 'privacy')->name('privacy');
+Route::view('/terms', 'terms')->name('terms');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'show'])->name('login');
