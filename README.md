@@ -86,7 +86,7 @@ php artisan storage:link
 php artisan test
 ```
 
-45 test / 125 assertion, database `padelio_test`, `RefreshDatabase`. CI berjalan di GitHub Actions (PHP 8.4 + PostgreSQL 16 service).
+47 test / 127 assertion, database `padelio_test`, `RefreshDatabase`. CI berjalan di GitHub Actions (PHP 8.4 + PostgreSQL 16 service).
 
 ---
 
@@ -170,6 +170,7 @@ scripts/              dev-server, backup, healthcheck, push-all
 | CSP | `script-src 'self' https://static.cloudflareinsights.com`; frame-ancestors none |
 | Header | HSTS, XFO DENY, nosniff, Referrer-Policy, Permissions-Policy, COOP/CORP |
 | Anti-index | `robots.txt Disallow: /` + `X-Robots-Tag: noindex` |
+| Path bypass | Caddy menolak `%2F`/`%5C` sebelum routing (mencegah bypass Access via encoded slash) |
 | Kebocoran versi | `X-Powered-By` dihapus + `expose_php=Off` |
 | Harga | Dihitung server; parameter klien diabaikan |
 | Slot ganda | Partial unique index `(court_id,date,slot)` |

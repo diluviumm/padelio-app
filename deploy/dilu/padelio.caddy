@@ -4,6 +4,8 @@ http://padelio.naygars.site {
 	request_body {
 		max_size 10MB
 	}
+	@encoded_sep expression {http.request.uri}.contains("%2F") || {http.request.uri}.contains("%2f") || {http.request.uri}.contains("%5C") || {http.request.uri}.contains("%5c")
+	respond @encoded_sep 404
 	php_fastcgi 127.0.0.1:9001
 	file_server
 	header {
