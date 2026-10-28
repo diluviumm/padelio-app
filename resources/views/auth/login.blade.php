@@ -21,8 +21,10 @@
             <button class="btn btn-primary btn-block" type="submit">Masuk</button>
         </form>
 
-        <div class="divider" style="margin:18px 0"></div>
-        <p class="faint small">Akun demo: <b>user@padelio.id</b> / user12345 · <b>admin@padelio.id</b> / admin12345</p>
+        @if(app()->environment('local'))
+            <div class="divider" style="margin:18px 0"></div>
+            <p class="faint small">Akun demo lokal: lihat README.</p>
+        @endif
         <a class="btn btn-ghost btn-block" style="margin-top:10px" href="{{ route('home') }}">Jelajah sebagai tamu</a>
     </div>
 </div>

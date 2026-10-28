@@ -6,7 +6,7 @@
     <meta name="description" content="Padelio - Padel Ladder Indonesia. Ranking, challenge, sewa lapangan.">
     <title>@yield('title', 'Padelio') · Padelio</title>
     <link rel="icon" type="image/png" href="{{ asset('img/brand-favicon.png') }}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}?v=1">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}?v=2">
 </head>
 <body>
 @include('partials.sprite')

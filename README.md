@@ -2,7 +2,8 @@
 
 Aplikasi komunitas padel: ladder ELO, challenge, booking lapangan, event + bracket, dan panel admin.
 
-> **Status:** berjalan lokal di `http://127.0.0.1:8001` (dev server). **Tidak** dideploy ke `padel.ishmly.space` sesuai instruksi 28 Okt 2026.
+> **Status:** live di **https://padelio.naygars.site** (Cloudflare Tunnel → `127.0.0.1:8001` di laptop).
+> Tidak memakai `padel.ishmly.space`.
 > Repo mock lama (`diluviumm/padelio`) tetap menjadi referensi tampilan; proyek ini adalah implementasi full PHP.
 
 ---
@@ -17,6 +18,7 @@ Aplikasi komunitas padel: ladder ELO, challenge, booking lapangan, event + brack
 | Auth | Laravel Auth + Argon2id (`password` cast `hashed`) |
 | Frontend | Blade + CSS custom (tanpa Node/build step) |
 | Testing | PHPUnit 12 (44 test, 119 assertion) |
+| Deployment | Cloudflare Tunnel `hermes` → systemd user `padelio-app` (:8001) + `padelio-pg` (:5544) |
 
 ---
 
@@ -74,6 +76,20 @@ php artisan test
 
 44 test / 119 assertion, memakai database `padelio_test` (lihat `phpunit.xml`) dan `RefreshDatabase`.
 
+### 4. Layanan produksi (user systemd, tanpa root)
+
+```bash
+systemctl --user enable --now padelio-pg.service
+systemctl --user enable --now padelio-app.service
+systemctl --user restart padelio-app.service   # setelah ubah kode
+systemctl --user status padelio-app padelio-pg
+```
+
+- `padelio-app.service` → `php artisan serve --host=127.0.0.1 --port=8001 --no-reload` (4 worker).
+- `padelio-pg.service` → PostgreSQL cluster `~/.local/share/padelio/pgdata`.
+- Cloudflare Tunnel: entri `padelio.naygars.site → http://localhost:8001` di `~/.cloudflared/config.yml`.
+- Kredensial admin/pemain: `~/.hermes/.secrets/padelio-naygars-credentials.env` (mode 600, jangan dicetak).
+
 ---
 
 ## Struktur Penting
@@ -111,6 +127,9 @@ public/js/booking.js  update total checkout
 | Race ELO | Transaksi + `lockForUpdate` + guard idempoten |
 | Upload | Validasi `image` + MIME, re-encode 200×200 JPEG, nama acak |
 | Audit | `audit_logs` untuk approve, cancel, suspend, rating, bracket |
+| Tunnel | Cloudflare Tunnel; origin hanya `127.0.0.1:8001`, tidak ada port publik |
+| Anti-index | `X-Robots-Tag: noindex, nofollow` + `APP_ENV=production` + `APP_DEBUG=false` |
+| Header | X-Powered-By dihapus; COOP/CORP same-origin; CSP mengizinkan beacon Web Analytics Cloudflare |
 
 ---
 
@@ -119,7 +138,10 @@ public/js/booking.js  update total checkout
 - Pembayaran masih mock (QRIS/Transfer/Saldo dicatat, tanpa gateway).
 - Belum ada email verification / reset password via email.
 - Notifikasi in-app saja (queue `sync`).
-- Belum ada deployment publik; menunggu keputusan hosting (bukan `padel.ishmly.space`).
+- Server aplikasi masih **PHP built-in server** (4 worker) — belum PHP-FPM/Caddy karena butuh akses root di server.
+- Cloudflare Web Analytics aktif di zone `naygars.site`; beacon-nya diizinkan CSP. Jika tidak diinginkan, matikan Web Analytics di dashboard Cloudflare.
+- Backup DB manual; cron harian belum dipasang.
+- Cloudflare Access untuk `/admin` belum dipasang (opsional).
 
 ---
 

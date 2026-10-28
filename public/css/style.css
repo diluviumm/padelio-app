@@ -596,3 +596,6 @@ details.inline-edit>summary{cursor:pointer;font-size:.78rem;font-weight:700;colo
 .slot.booked,.slot.maintenance{opacity:.5;pointer-events:none;text-decoration:line-through}
 .slot small{display:block;font-size:.62rem;font-weight:600;color:var(--text-faint);text-decoration:none}
 .badge-live{display:inline-flex;align-items:center;gap:5px;font-size:.7rem;font-weight:800;color:var(--danger)}
+
+/* smooth theme switch */
+body{transition:background-color .22s ease,color .22s ease}
